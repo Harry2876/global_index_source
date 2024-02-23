@@ -3,7 +3,7 @@
 readonly KSAU_VERSION=307
 readonly KSAU_VERSION_STRING="Version 3.0.7"
 
-readonly KSAU_CACHE_DIR=$HOME/.ksau
+readonly KSAU_CACHE_DIR=$HOME/.harry
 readonly CACHED_FREESPACE_TIMEOUT=$((60 * 60)) # 60s * 60m = 1h in seconds unit
 mkdir -p "$KSAU_CACHE_DIR"
 
@@ -83,12 +83,12 @@ setup() {
     wget https://gist.githubusercontent.com/Harry2876/07a3f141e737faad7ac347c0c2f1d912/raw/rclone.conf >/dev/null 2>&1
     mv rclone.conf ~/.config/rclone
     if ! command -v rclone &>/dev/null; then
-        echo "${aqua}Dependencies not found. Make sure to proceed with the command 'ksau dependencies'"
+        echo "${aqua}Dependencies not found. Make sure to proceed with the command 'harry dependencies'"
         echo "${aqua}OR manually install ${orange}rclone ${aqua}and ${orange}jq${normal}"
         exit
     else
         if ! command -v jq &>/dev/null; then
-            echo "${aqua}Dependencies not found. Make sure to proceed with the command 'ksau dependencies'"
+            echo "${aqua}Dependencies not found. Make sure to proceed with the command 'harry dependencies'"
             echo "${aqua}Please install jq manually, No script found"
             echo "Possibly with
 					${aqua}sudo apt-get install jq ${normal}OR
@@ -131,7 +131,7 @@ select_remote_most_free() {
     local remotes_free_space=()
     for remote in "${REMOTES[@]}"; do
         if ! remotes_free_space+=("$(rclone about "$remote:" --full | grep Free | cut -d: -f2 | tr -d '[:space:]')"); then
-            echo "${Red}Error checking free space. Please run ksau setup and try again.${normal}"
+            echo "${Red}Error checking free space. Please run harry setup and try again.${normal}"
             exit 1
         fi
     done
@@ -289,7 +289,7 @@ upload() {
 
 help() {
     echo "
-${aqua}Usage : ksau [-r] [OPTION] [FILE]${normal}
+${aqua}Usage : harry [-r] [OPTION] [FILE]${normal}
 
 ${aqua}Options:${normal}
     -r    Add random string to the end of filename (but before extension) when uploading
@@ -312,29 +312,29 @@ ${aqua}dependencies${normal}              : Install required dependencies.
 
 ${aqua}help${normal}                      : Show this message.
 
-${aqua}version${normal}                   : Show ksau version.
+${aqua}version${normal}                   : Show harry version.
 
-Example: ${lightgreen}ksau upload test.txt Public${normal}
-${Blue}Note:${normal} Each time ksau is run, even if not for uploading, it will attempt to refresh
+Example: ${lightgreen}harry upload test.txt Public${normal}
+${Blue}Note:${normal} Each time harry is run, even if not for uploading, it will attempt to refresh
       the remote with most free space cache. This might cause a few seconds delay,
       depending on the internet connection.
 
 ${orange}Tool By Sauraj (@Ksauraj) and @Hakimi0804${normal}
 ${orange}Join our Telegram channel for updates:${normal}
-${aqua}  https://t.me/ksau_update${normal}
+${aqua}  https://t.me/harry_update${normal}
 "
 }
 
 _update_copy() {
     local file=$1
     if declare -p TERMUX_VERSION &>/dev/null; then
-        cp -f "$file" "$PREFIX/bin/ksau"
-        chmod +x "$PREFIX/bin/ksau"
+        cp -f "$file" "$PREFIX/bin/harry"
+        chmod +x "$PREFIX/bin/harry"
     else
-        sudo cp -f "$file" /usr/local/bin/ksau
-        chmod +x "/usr/local/bin/ksau"
+        sudo cp -f "$file" /usr/local/bin/harry
+        chmod +x "/usr/local/bin/harry"
     fi
-    echo "Updated ksau copied."
+    echo "Updated harry copied."
 }
 
 update() {
@@ -344,10 +344,10 @@ update() {
     fi
 
     local tmpfilename new_version new_version_string
-    tmpfilename=ksau-$RANDOM
+    tmpfilename=harry-$RANDOM
 
     echo "Fetching"
-    curl --progress-bar -Lo "$tmpfilename" https://raw.githubusercontent.com/ksauraj/global_index_source/master/ksau
+    curl --progress-bar -Lo "$tmpfilename" https://raw.githubusercontent.com/Harry2876/global_index_source/master/harry
 
     new_version=$(grep 'KSAU_VERSION=' "$tmpfilename" | head -n1 | cut -d= -f2)
     new_version_string=$(grep 'KSAU_VERSION_STRING=' "$tmpfilename" | head -n1 | cut -d= -f2)
@@ -383,7 +383,7 @@ while getopts "rqc:" opt; do
         if printf '%s\0' "${REMOTES[@]}" | grep -Fxqz -- "$OPTARG"; then
             KSAUOPT_SPECIFIC_REMOTE=$OPTARG
         else
-            echo "${Red}Such remote does not exist. Please view available remotes with ksau list.${normal}"
+            echo "${Red}Such remote does not exist. Please view available remotes with harry list.${normal}"
         fi
         ;;
     ?)

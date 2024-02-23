@@ -8,23 +8,23 @@ lightgreen=$(echo -en "\e[92m")
 
 if declare -p TERMUX_VERSION &>/dev/null; then
     SUDO=""
-    INSTALLDIR=$PREFIX/bin/ksau
+    INSTALLDIR=$PREFIX/bin/harry
 else
     SUDO=sudo
-    INSTALLDIR=/usr/local/bin/ksau
+    INSTALLDIR=/usr/local/bin/harry
     echo "Make sure you have sudo privileges"
 fi
 
-rm ksau >/dev/null 2>&1
+rm harry >/dev/null 2>&1
 $SUDO rm $INSTALLDIR >/dev/null 2>&1
-curl https://raw.githubusercontent.com/Harry2876/global_index_source/master/ksau >ksau 2>/dev/null
-$SUDO mv ksau $INSTALLDIR
+curl https://raw.githubusercontent.com/Harry2876/global_index_source/master/harry >harry 2>/dev/null
+$SUDO mv harry $INSTALLDIR
 chmod +x $INSTALLDIR
 
-if ! command -v ksau &>/dev/null; then
+if ! command -v harry &>/dev/null; then
     echo "${orange}Installation Failed !!!"
     echo "Posssible Solution : Don't run as root or check Root version.${normal}"
     exit
 else
-    ksau
+    harry
 fi

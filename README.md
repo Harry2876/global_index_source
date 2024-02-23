@@ -1,4 +1,4 @@
-ksau
+harry
 ======
 
 
@@ -22,32 +22,32 @@ curl -s https://raw.githubusercontent.com/Harry2876/global_index_source/master/s
 ```
 ### Once tool is installed, run setup.
 ```
-ksau setup
+harry setup
 ```
 ### If dependencies not installed, then run
 ```
-ksau dependencies
+harry dependencies
 ```
 
 ### To upload
 ```
-ksau upload [FILE] [FOLDER] # Uploads the given file to the given folder on index.
-#Example - ksau upload test.txt Public
+harry upload [FILE] [FOLDER] # Uploads the given file to the given folder on index.
+#Example - harry upload test.txt Public
 ```
 
 ### To update
 ```
-ksau update
+harry update
 ```
 > Note : Update might be broken for v2.1.0 or below
 
 ### To check version
 ```
-ksau version
+harry version
 ```
 ## Usage
 ```
-Usage : ksau [-r] [OPTION]... [FILE]...
+Usage : harry [-r] [OPTION]... [FILE]...
 
 Options:
     -r    Add random string to the end of filename when uploading
@@ -73,7 +73,7 @@ help                      : To get this message.
 
 version                   : To get version info.
 
-Example : ksau upload test.txt Public
+Example : harry upload test.txt Public
 
 ```
 
@@ -114,6 +114,6 @@ Please don't abuse, we have limited storage.
 Also I'm sharing my configs just for community use and I get nothing from it.
 
 ### Create Your Own
-Just change your `rclone config` and `index link` in `ksau`.
+Just change your `rclone config` and `index link` in `harry`.
 
-### Tool By @Ksauraj (@ksauraj and @Hakimi0804)
+### Tool By @Ksauraj (@harryraj and @Hakimi0804)
