@@ -197,14 +197,8 @@ rclone_progress_bar() {
     touch log
     if [ -z "$new_filename" ]; then new_filename=$(basename "$file"); fi
     case $SELECTED_REMOTE in
-    hakimionedrive)
-        rclone -P --checkers=32 --onedrive-chunk-size 60M copyto "$file" "hakimionedrive:/Public/${u_folder}/$new_filename" | tee log >/dev/null || touch "$status_dir/failed" &
-        ;;
-    oned)
-        rclone -P --checkers=32 --onedrive-chunk-size 60M copyto "$file" "oned:/${u_folder}/$new_filename" | tee log >/dev/null || touch "$status_dir/failed" &
-        ;;
-    saurajcf)
-        rclone -P --checkers=32 --onedrive-chunk-size 60M copyto "$file" "saurajcf:/MY_BOMT_STUFFS/${u_folder}/$new_filename" | tee log >/dev/null || touch "$status_dir/failed" &
+    hariom)
+        rclone -P --checkers=32 --onedrive-chunk-size 60M copyto "$file" "hariom:/IndexFiles/${u_folder}/$new_filename" | tee log >/dev/null || touch "$status_dir/failed" &
         ;;
     esac
     until [ -z "$(jobs -r)" ]; do
@@ -278,21 +272,15 @@ upload() {
     echo -e "\n$(clearline)$(upline 1)$(clearline)$(upline 1)"
     echo "$(clearline) Upload Completed "
     case $SELECTED_REMOTE in
-    oned)
+    hariom)
         echo "$(clearline) Download link - ${lightgreen}https://index-hariom-org.vercel.app/${url_folder}/${url_file}${normal} "
     esac
     echo "$(clearline)"
 
     if [[ $KSAUOPT_QUIET == true ]]; then
         case $SELECTED_REMOTE in
-        hakimionedrive)
-            builtin echo "https://onedrive-vercel-index-kohl-eight-30.vercel.app/${url_folder}/${url_file}"
-            ;;
-        oned)
-            builtin echo "https://index.sauraj.eu.org/${url_folder}/${url_file}"
-            ;;
-        saurajcf)
-            builtin echo "https://my-index-azure.vercel.app/${url_folder}/${url_file}"
+        hariom)
+            builtin echo "https://index-hariom-org.vercel.app/${url_folder}/${url_file}"
             ;;
         esac
 
